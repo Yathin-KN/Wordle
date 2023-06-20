@@ -1,46 +1,35 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  TextInput,
-  Text,
-} from "react-native";
-import { useEffect, useState,useContext } from "react";
+import { StyleSheet, TouchableOpacity, View, TextInput, Text } from "react-native";
+import { useEffect, useState, useContext } from "react";
 import GlobalContext from "../GlobalContext";
 
-const Cell = ({ val, character, handel, correct, update, char }) => {
-  const [cellCharacter, setCellCharacter] = useState(char);
-  const {setCellMap}=useContext(GlobalContext);
+const Cell = ({ character, val, updateCoordinates }) => {
+  const { setCellMap, map, coordinates } = useContext(GlobalContext);
+  const [ch, setCh] = useState();
+
+  const handle = () => {
+    setCellMap(character);
+    updateCoordinates();
+  };
+
   useEffect(() => {
-    if (correct) {
-      setCellCharacter(char);
-    }
-  }, [correct, char]);
+    setCh(map.get(character));
+  }, [map]);
 
   return val ? (
-    //wordle cells
-    <TouchableOpacity
-      style={[styles.cell, styles.c1(1)]}
-      onPress={() => handelClick()}
-    >
-      <Text style={[styles.text]}>{cellCharacter}</Text>
+    // Wordle cells
+    <TouchableOpacity style={[styles.cell, styles.c1(1)]}>
+      <Text style={[styles.text]}>{ch}</Text>
     </TouchableOpacity>
   ) : (
-    //keyboard
-    <TouchableOpacity
-      style={styles.key}
-      onPress={() => {
-        handel(character);
-        setCellMap({"row":1,"col":1},character);
-        update();
-      }}
-    >
+    // Keyboard
+    <TouchableOpacity style={styles.key} onPress={handle}>
       <Text style={styles.text}>{character}</Text>
     </TouchableOpacity>
   );
 };
 
 export default Cell;
+
 const size = 65;
 const styles = StyleSheet.create({
   cell: {
@@ -68,8 +57,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   c1: (val) => {
-    return val
-      ? { backgroundColor: "#536e59" }
-      : { backgroundColor: "#abb063" };
+    return val ? { backgroundColor: "#536e59" } : { backgroundColor: "#abb063" };
   },
 });

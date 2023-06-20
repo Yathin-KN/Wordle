@@ -14,42 +14,14 @@ import { useEffect, useState ,useContext} from "react";
 import Check from "./check";
 import GlobalContext from "./GlobalContext";
 export default function App() {
-  const [selected, setSelected] = useState("");
-  const [cellCoordinates, setCellCoordinates] = useState({
-    row: 0,
-    col: -1,
-  });
+  
 
-  const updateCoordinates = () => {
-    setCellCoordinates((prev) => {
-      let value = prev.col + 1;
-      if (value === 5) {
-        prev.col = 0;
-        prev.row = prev.row + 1;
-      } else {
-        prev.col = prev.col + 1;
-      }
-      return {...prev}
-    });
-  };
-  const reset=()=>{
-    setCellCoordinates({"row":0,"col":-1});
-  }
-  const handelClick = (character) => {
-    setSelected(character);
-  };
+  
   return (
     <GlobalContextProvider>
         <View style={styles.container}>
-      <CellContainer cellCoordinates={cellCoordinates} value={selected}/>
-      <Keyboard set={handelClick} update={updateCoordinates} />
-      <Text>{selected}</Text>
-      <Text>
-        row {cellCoordinates.row} column {cellCoordinates.col}
-      </Text>
-      <TouchableOpacity onPress={()=>{reset()}}>
-        <Text>reset</Text>
-      </TouchableOpacity>
+      <CellContainer/>
+      <Keyboard />
       <Check/>
       <StatusBar style="auto" />
     </View>

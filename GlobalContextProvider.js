@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GlobalContext from "./GlobalContext";
 
 const GlobalContextProvider = ({ children }) => {
-  const [val, setVal] = useState(0);
-  const update = () => {
-    setVal((val) => val + 1);
+  let initialstate={
+    row: 0,
+    col: 0,
+  }
+  const [coordinates, setCoordinates] = useState(initialstate);
+
+  const updateCoordinates = () => {
+    setCoordinates((prev) => {
+      let cRow = prev.row;
+      let cCol = prev.col;
+      let nRow;
+      let nCol;
+      if (cCol === 4) {
+        nCol = 0;
+        nRow = cRow + 1;
+      } else {
+        nCol = cCol + 1;
+        nRow = cRow;
+      }
+      return { row: nRow, col: nCol };
+    });
   };
+
+  const onResetCoordinates=()=>{
+    setCoordinates(()=>initialstate)
+  }
   const [map, setMap] = useState(new Map());
-  
+
   const resetCellMap = () => {
     const newMap = new Map();
     for (let i = 0; i < 26; i++) {
@@ -16,19 +38,25 @@ const GlobalContextProvider = ({ children }) => {
     setMap(newMap);
     console.log(newMap);
   };
-  const setCellMap = (coordinates, value) => {
+  const setCellMap = (value) => {
     const newMap = new Map(map);
     newMap.set(coordinates.row * 5 + coordinates.col, value);
     setMap(newMap);
     console.log(newMap);
   };
+
+  useEffect(()=>{
+    resetCellMap();
+  },[])
   return (
     <GlobalContext.Provider
       value={{
-        state: val,
-        updateState: update,
-        resetCellMap:resetCellMap,
-        setCellMap:setCellMap,
+        coordinates,
+        onResetCoordinates,
+        updateCoordinates,
+        resetCellMap: resetCellMap,
+        setCellMap: setCellMap,
+        map,
       }}
     >
       {children}
