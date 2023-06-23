@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Cell from "./cell";
 import { useContext } from "react";
 import GlobalContext from "../GlobalContext";
+import Ionicons from '@expo/vector-icons/Ionicons'
 const Keyboard = () => {
   const {
     map,
@@ -35,9 +36,7 @@ const Keyboard = () => {
     <View style={style.container}>
       {keys()}
       <TouchableOpacity onPress={() => handel()}>
-        <Text>
-          row {coordinates.row} col {coordinates.col}
-        </Text>
+      <Ionicons name="refresh-circle" size={40} color="#979899" />
       </TouchableOpacity>
     </View>
   );
