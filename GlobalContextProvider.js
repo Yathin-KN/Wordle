@@ -66,7 +66,7 @@ const GlobalContextProvider = ({ children }) => {
 
   const resetColorMap = () => {
     const newMap = new Map();
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 30; i++) {
       newMap.set(i, 0);
     }
     setColorMap(newMap);
@@ -74,7 +74,7 @@ const GlobalContextProvider = ({ children }) => {
 
   const resetCellMap = () => {
     const newMap = new Map();
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 30; i++) {
       newMap.set(i, "");
     }
     resetColorMap();

@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   c2: (val) => {
     return val == 0
-      ? { backgroundColor: "#121213" }
+      ? { backgroundColor: "#3a3a3c",borderWidth:0 }
       : val == 1
       ? { backgroundColor: "#b59f3b" ,borderWidth:0}
       : { backgroundColor: "#538d4e",borderWidth:0 };

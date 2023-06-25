@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingVertical: 40,
+    paddingVertical: 15,
     alignItems: "center",
     flexWrap: "wrap",
     flexDirection: "row",
