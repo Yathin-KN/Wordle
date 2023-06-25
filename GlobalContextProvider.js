@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import GlobalContext from "./GlobalContext";
 import check from "./check";
+import useFetch from "./api/api";
 const GlobalContextProvider = ({ children }) => {
-  const [guessWord, setGuessWord] = useState(["Y", "A", "T", "H", "I"]);
+  const [guessWord, setGuessWord] = useState(["T", "A", "S", "T", "E"]);
   let initialstate = {
     row: 0,
     col: 0,
@@ -13,7 +14,7 @@ const GlobalContextProvider = ({ children }) => {
   const [noWords, setNoWords] = useState(0);
   const [word, setWord] = useState(initialstateWord);
   const [map, setMap] = useState(new Map());
-  const [colorMap, setColorMap] = useState(()=>new Map());
+  const [colorMap, setColorMap] = useState(() => new Map());
   const updateCoordinates = () => {
     setCoordinates((prev) => {
       let cRow = prev.row;
@@ -36,8 +37,7 @@ const GlobalContextProvider = ({ children }) => {
   };
 
   const colorMapUpdate = () => {
-
-    const currentWord = check(word.slice(-5),guessWord);
+    const currentWord = check(word.slice(-5), guessWord);
     setColorMap((prev) => {
       const newColorMap = new Map(prev);
       for (let i = 0; i < currentWord.length; i++) {
@@ -57,7 +57,12 @@ const GlobalContextProvider = ({ children }) => {
 
   const onResetCoordinates = () => {
     setCoordinates(() => initialstate);
+    // setGuessWord(()=>useFetch());
   };
+
+  useEffect(()=>{
+    console.log(guessWord);
+  },[guessWord])
 
   const resetColorMap = () => {
     const newMap = new Map();
@@ -89,7 +94,7 @@ const GlobalContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log("color map ",colorMap);
+    console.log("color map ", colorMap);
   }, [colorMap]);
   return (
     <GlobalContext.Provider
@@ -110,7 +115,4 @@ const GlobalContextProvider = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
-//states to be managed  done
-//the coordinates done
-//the colour
 export default GlobalContextProvider;

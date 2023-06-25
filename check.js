@@ -1,4 +1,3 @@
-
 const check = (guessWord, word) => {
   if (guessWord.length !== word.length) {
     throw new Error("Input arrays must have equal length");
