@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useEffect, useState, useContext } from "react";
 import GlobalContext from "../GlobalContext";
+import Keyboard from "./keyboard2";
 
 const Cell = ({ character, val, updateCoordinates }) => {
   const { setCellMap, map, coordinates, colorMap } = useContext(GlobalContext);
@@ -35,10 +36,11 @@ const Cell = ({ character, val, updateCoordinates }) => {
       <Text style={[styles.text, styles.cellText]}>{ch}</Text>
     </TouchableOpacity>
   ) : (
-    // Keyboard
+    // // Keyboard
     <TouchableOpacity style={character!='-'?styles.key:styles.keyPadding} onPress={handle}>
       {character!='-'?<Text style={[styles.text, styles.keyText]}>{character}</Text>:<Text style={[styles.keyPadding]}></Text>}
     </TouchableOpacity>
+    // <Keyboard/>
   );
 };
 
@@ -90,10 +92,12 @@ const styles = StyleSheet.create({
       : { backgroundColor: "#abb063" };
   },
   c2: (val) => {
-    return val == 0
-      ? { backgroundColor: "#3a3a3c",borderWidth:0 }
+    return val == -1
+      ? { backgroundColor: "#121213" }
       : val == 1
       ? { backgroundColor: "#b59f3b" ,borderWidth:0}
-      : { backgroundColor: "#538d4e",borderWidth:0 };
+      : val===2?{ backgroundColor: "#538d4e",borderWidth:0 }:{
+        backgroundColor:'#3a3a3c',borderWidth:0
+      };
   },
 });

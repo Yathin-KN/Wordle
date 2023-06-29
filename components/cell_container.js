@@ -3,7 +3,6 @@ import { useContext } from "react";
 import GlobalContext from "../GlobalContext";
 import Cell from "./cell";
 const CellContainer = () => {
-  const { coordinates, map } = useContext(GlobalContext);
   const render_cell = () => {
     const cells = [];
     for (let i = 0; i < 6; i++) {

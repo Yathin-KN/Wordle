@@ -6,11 +6,12 @@ import GlobalContextProvider from "./GlobalContextProvider";
 import Keyboard from "./components/keyboard";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import GlobalContext from "./GlobalContext";
-import { useContext } from "react";
+import { useContext ,useEffect , useState} from "react";
 
 export default function App() {
- 
-
+  const [answer,setAnswer]=useState("word not fetched yet !")
+  
+   
   const [fontsLoaded] = useFonts({
     'Karnak': require('./assets/DMSerifDisplay-Regular.ttf'),
   });
@@ -20,13 +21,13 @@ export default function App() {
   }
 
 
+
   return (
     <GlobalContextProvider>
       <View style={styles.titleContainer}>
           <Text style={styles.title}>Wordle</Text>
         </View>
       <View style={styles.container}>
-        
         <CellContainer />
         <Keyboard />
         <StatusBar style="auto" />
@@ -42,6 +43,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: "#121213",
     borderColor:'white',
+  },
+  answer:{
+    color:'white',
+    textAlign:'center'
   },
   reset:{
      position:'absolute',
