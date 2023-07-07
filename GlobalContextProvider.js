@@ -17,8 +17,8 @@ let initialstateWord = [];
     method: 'GET',
     url: 'https://wordle-answers-solutions.p.rapidapi.com/answers',
     headers: {
-      'X-RapidAPI-Key': '583422a618msh3091f90e5fa82d9p1f154cjsn6ca52770807e',
-      'X-RapidAPI-Host': 'wordle-answers-solutions.p.rapidapi.com'
+      'X-RapidAPI-Key': '83422618msh3091f90e5fa82d9p1f154cjsn6ca52770807e',
+      'X-RapidAPI-Host': 'wordle-answers-solutions.rapidapi.com'
     }
   };
   
